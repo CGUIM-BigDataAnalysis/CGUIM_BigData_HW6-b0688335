@@ -1,9 +1,4 @@
-"0","sum(X10602$桃園一期小計)
-"
-"1","[1]"
-"1"," 1463637"
-"1","
-"
+"0","library(magrittr)"
 "2","Warning message:
 "
 "2","In strsplit(code, ""\n"", fixed = TRUE) :"
@@ -11,13 +6,43 @@
  "
 "2"," input string 1 is invalid in this locale
 "
-"0","sum(X10602$桃園二期小計)"
-"1","[1]"
-"1"," 1659796"
-"1","
+"0","library(reshape2)"
+"2","package ��reshape2�� was built under R version 3.3.3"
+"0","library(dplyr)"
+"2","package ��dplyr�� was built under R version 3.3.3"
+"2","
+Attaching package: ��dplyr��
+
 "
-"0","sum(X10602$松山機場小計)"
-"1","[1]"
-"1"," 235784"
-"1","
+"2","The following objects are masked from ��package:stats��:
+
+    filter, lag
+
 "
+"2","The following objects are masked from ��package:base��:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","library(ggplot2)"
+"2","package ��ggplot2�� was built under R version 3.3.3"
+"0","people_in<-(X10603_04[,grep(""入境查驗"",names(X10603_04))])%>%colSums()%>%data.frame()"
+"0","people_in<-cbind(people_in,""港口/機場""=rownames(people_in))"
+"0","names(people_in)[names(people_in)=="".""]=""入境總計"""
+"0","people_in<-(people_in[order(people_in$入境總計,decreasing=T),])"
+"0","rownames(people_in) <- NULL"
+"0","#取得入境人數統計"
+"0","people_out<-(X10603_04[,grep(""出境查驗"",names(X10603_04))])%>%colSums()%>%data.frame()"
+"0","people_out<-cbind(people_out,""港口/機場""=rownames(people_out))"
+"0","names(people_out)[names(people_out)=="".""]=""出境總計"""
+"0","people_out<-(people_out[order(people_out$出境總計,decreasing=T),])"
+"0","rownames(people_out) <- NULL"
+"0","#取得出境人數統計"
+"0","cross_match<-cbind(people_in,people_out)"
+"0","rownames(cross_match) <- NULL"
+"0","#將出入境人數結合"
+"0","View(cross_match)"
+"0","#用表格來觀察港口/機場的出入境狀況"
+"0","qplot(入境總計,出境總計,"
+"0","      data=cross_match,"
+"0","      geom = c(""point"", ""smooth""))"
